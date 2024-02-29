@@ -4,7 +4,11 @@
   background-image: url("../public/background.png");
   background-size: cover;
   background-position: center;
-  display: flex;
+}
+
+.content {
+  margin-top: 80px;
+  height: calc(100vh - 80px);
 }
 
 .img-logo {
