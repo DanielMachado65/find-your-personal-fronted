@@ -8,13 +8,14 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import "./App.css";
-import { Box, Container, styled } from "@mui/material";
+import { Container, styled } from "@mui/material";
 
 const HeaderTitle = styled(Typography)`
   flex-grow: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-weight: 300;
 `;
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
               className="img-logo"
               style={{ height: "25px", marginRight: "10px" }}
             />
-            Find your Personal
+            Find Your Personal
           </HeaderTitle>
           <IconButton color="inherit">
             <AccountCircle />
@@ -46,7 +47,7 @@ function App() {
               fontWeight="600"
             >
               Personal <br />
-              Trainer
+              Trainers
             </Typography>
             <TextField
               sx={{ width: "100%", maxWidth: "500px" }}
