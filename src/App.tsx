@@ -1,5 +1,13 @@
+import "./App.css"; // Importando o arquivo CSS
+
 function App() {
-  return <h1>Olá</h1>;
+  return (
+    <div className="background-image">
+      <div className="search-bar">
+        <input type="text" placeholder="Pesquisar..." />
+      </div>
+    </div>
+  );
 }
 
 export default App;
