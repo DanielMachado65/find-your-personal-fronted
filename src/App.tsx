@@ -37,26 +37,22 @@ function App() {
         </Toolbar>
       </AppBar>
       <Container>
-        <Grid
-          container
-          className="container"
-          style={{ height: "100vh" }}
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Grid className="content" style={{ height: "100vh" }}>
           <Grid item xs={12}>
-            <Typography variant="h1" component="h1" gutterBottom align="center">
-              Personal Trainer
+            <Typography
+              variant="h1"
+              component="h1"
+              gutterBottom
+              fontWeight="600"
+            >
+              Personal <br />
+              Trainer
             </Typography>
-          </Grid>
-          <Grid item md={6}>
-            <Box display="flex" justifyContent="center">
-              <TextField
-                sx={{ width: "100%", maxWidth: "500px" }}
-                label="Pesquisar..."
-                variant="outlined"
-              />
-            </Box>
+            <TextField
+              sx={{ width: "100%", maxWidth: "500px" }}
+              label="Digite sua cidade"
+              variant="standard"
+            />
           </Grid>
         </Grid>
 
