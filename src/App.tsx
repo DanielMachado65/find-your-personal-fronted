@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import "./App.css";
 import { Avatar, Container, styled } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HeaderTitle = styled(Typography)`
   flex-grow: 1;
@@ -19,11 +19,12 @@ const HeaderTitle = styled(Typography)`
 `;
 
 const Footer = styled("footer")`
-  position: relative;
+  height: 50vh;
   width: 100%;
-  margin-top: 250px;
   padding: 20px 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: end;
 `;
 
 const personals = [
@@ -31,7 +32,7 @@ const personals = [
     name: "Personal 1",
     description: "Descrição do Personal 1",
     image: "/path/to/personal1.jpg",
-    city: "São Paulo",
+    city: "Sao Paulo",
   },
   {
     name: "Personal 2",
@@ -45,10 +46,41 @@ const personals = [
     image: "/path/to/personal3.jpg",
     city: "Curitiba",
   },
+  {
+    name: "Personal 4",
+    description: "Descrição do Personal 3",
+    image: "/path/to/personal3.jpg",
+    city: "Curitiba",
+  },
 ];
+
+function useDebounce(value: string, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+function normalizeString(str: string) {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
 
 function App() {
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 300);
 
   return (
     <div className="background-image">
@@ -69,7 +101,7 @@ function App() {
         </Toolbar>
       </AppBar>
       <Container>
-        <Grid className="content" style={{ height: "100vh" }}>
+        <Grid className="content" style={{ height: "60vh" }}>
           <Grid item xs={12}>
             <Typography
               variant="h1"
@@ -92,38 +124,43 @@ function App() {
 
         {/* Grid dos profissionais */}
         <Grid container spacing={3}>
-          {personals
-            .filter((personal) =>
-              personal.city.toLowerCase().includes(search.toLowerCase())
-            )
-            .map((personal, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
-                <Paper
-                  elevation={3}
-                  sx={{
-                    padding: "20px",
-                    textAlign: "center",
-                    backgroundColor: "white",
-                    color: "black",
-                  }}
-                >
-                  <Avatar
+          {debouncedSearch &&
+            personals
+              .filter((personal) =>
+                normalizeString(personal.city).includes(
+                  normalizeString(debouncedSearch)
+                )
+              )
+              .map((personal, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Paper
+                    elevation={3}
                     sx={{
-                      bgcolor: "black",
-                      width: 56,
-                      height: 56,
-                      margin: "0 auto 10px",
+                      padding: "20px",
+                      textAlign: "center",
+                      backgroundColor: "white",
+                      color: "black",
                     }}
-                    alt={personal.name}
-                    src={personal.image}
-                  />
-                  <Typography variant="h5" component="h3" gutterBottom>
-                    {personal.name}
-                  </Typography>
-                  <Typography component="p">{personal.description}</Typography>
-                </Paper>
-              </Grid>
-            ))}
+                  >
+                    <Avatar
+                      sx={{
+                        bgcolor: "black",
+                        width: 56,
+                        height: 56,
+                        margin: "0 auto 10px",
+                      }}
+                      alt={personal.name}
+                      src={personal.image}
+                    />
+                    <Typography variant="h5" component="h3" gutterBottom>
+                      {personal.name}
+                    </Typography>
+                    <Typography component="p">
+                      {personal.description}
+                    </Typography>
+                  </Paper>
+                </Grid>
+              ))}
         </Grid>
       </Container>
       {/* Footer */}
