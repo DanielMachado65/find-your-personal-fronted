@@ -95,10 +95,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   const [search, setSearch] = useState("");
-  const [show, setShow] = useState(false);
   const debouncedSearch = useDebounce(search, 300);
-
-  console.log("darkMode", darkMode);
 
   return (
     <div className="background-image">
@@ -157,7 +154,11 @@ function App() {
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <Paper
                     elevation={3}
-                    sx={{ position: "relative", overflow: "hidden" }}
+                    sx={{
+                      position: "relative",
+                      overflow: "hidden",
+                      backgroundColor: darkMode ? "black" : "white",
+                    }}
                   >
                     <img
                       src={personal.image}
@@ -168,6 +169,7 @@ function App() {
                         objectFit: "cover",
                       }}
                     />
+                    {/* ratings */}
                     <Box
                       sx={{
                         position: "absolute",
@@ -181,37 +183,24 @@ function App() {
                       {personal.rating}
                     </Box>
                     <Typography
-                      variant="h5"
+                      color={getDarkMode(darkMode)}
+                      variant="h4"
                       component="h3"
                       gutterBottom
-                      sx={{ padding: "16px" }}
+                      paddingLeft={2}
+                      paddingTop={2}
                     >
                       {personal.name}
                     </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        padding: "8px 16px",
-                      }}
+                    <Typography
+                      color={getDarkMode(darkMode)}
+                      variant="subtitle2"
+                      component="h4"
+                      paddingLeft={2}
+                      gutterBottom
                     >
-                      <Button
-                        size="small"
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => setShow(!show)}
-                      >
-                        {show ? "Mostrar menos" : "Ver Mais"}
-                      </Button>
-                    </Box>
-                    {show && (
-                      <>
-                        <Divider />
-                        <Typography component="p" sx={{ padding: "16px" }}>
-                          Informações adicionais do personal aqui...
-                        </Typography>
-                      </>
-                    )}
+                      {personal.description}
+                    </Typography>
                   </Paper>
                 </Grid>
               ))}
