@@ -57,7 +57,7 @@ const personals = [
     name: "Maria Jose",
     description: "Descrição do Personal 3",
     image:
-      "https://mlbtbcqppupm.i.optimole.com/cb:II15~5a0ea/w:724/h:483/q:90/ig:avif/f:best/https://blog.newtonpaiva.br/wp-content/uploads/2020/09/iStock-692173084.jpg",
+      "https://www.faculdadeide.edu.br/files/news/16182575098578-personaltrainer8dicasparatersucessocomoprofissionalautnomo.jpg",
     city: "Curitiba",
     rating: "4.1",
   },
