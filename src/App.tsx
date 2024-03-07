@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import "./App.css";
-import { Avatar, Container, styled } from "@mui/material";
+import { Avatar, Box, Button, Container, Divider, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const HeaderTitle = styled(Typography)`
@@ -29,28 +29,36 @@ const Footer = styled("footer")`
 
 const personals = [
   {
-    name: "Personal 1",
+    name: "Jose Alfrade",
     description: "Descrição do Personal 1",
-    image: "/path/to/personal1.jpg",
+    image:
+      "https://mlbtbcqppupm.i.optimole.com/cb:II15~5a0ea/w:724/h:483/q:90/ig:avif/f:best/https://blog.newtonpaiva.br/wp-content/uploads/2020/09/iStock-692173084.jpg",
     city: "Sao Paulo",
+    rating: "4.8",
   },
   {
-    name: "Personal 2",
+    name: "Maria Alfrade",
     description: "Descrição do Personal 2",
-    image: "/path/to/personal2.jpg",
+    image:
+      "https://mlbtbcqppupm.i.optimole.com/cb:II15~5a0ea/w:724/h:483/q:90/ig:avif/f:best/https://blog.newtonpaiva.br/wp-content/uploads/2020/09/iStock-692173084.jpg",
     city: "Rio de Janeiro",
+    rating: "4.0",
   },
   {
-    name: "Personal 3",
+    name: "Tome Alfrade",
     description: "Descrição do Personal 3",
-    image: "/path/to/personal3.jpg",
+    image:
+      "https://mlbtbcqppupm.i.optimole.com/cb:II15~5a0ea/w:724/h:483/q:90/ig:avif/f:best/https://blog.newtonpaiva.br/wp-content/uploads/2020/09/iStock-692173084.jpg",
     city: "Curitiba",
+    rating: "4.2",
   },
   {
-    name: "Personal 4",
+    name: "Maria Jose",
     description: "Descrição do Personal 3",
-    image: "/path/to/personal3.jpg",
+    image:
+      "https://mlbtbcqppupm.i.optimole.com/cb:II15~5a0ea/w:724/h:483/q:90/ig:avif/f:best/https://blog.newtonpaiva.br/wp-content/uploads/2020/09/iStock-692173084.jpg",
     city: "Curitiba",
+    rating: "4.1",
   },
 ];
 
@@ -80,6 +88,7 @@ function normalizeString(str: string) {
 
 function App() {
   const [search, setSearch] = useState("");
+  const [show, setShow] = useState(false);
   const debouncedSearch = useDebounce(search, 300);
 
   return (
@@ -135,29 +144,61 @@ function App() {
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <Paper
                     elevation={3}
-                    sx={{
-                      padding: "20px",
-                      textAlign: "center",
-                      backgroundColor: "white",
-                      color: "black",
-                    }}
+                    sx={{ position: "relative", overflow: "hidden" }}
                   >
-                    <Avatar
-                      sx={{
-                        bgcolor: "black",
-                        width: 56,
-                        height: 56,
-                        margin: "0 auto 10px",
-                      }}
-                      alt={personal.name}
+                    <img
                       src={personal.image}
+                      alt={personal.name}
+                      style={{
+                        width: "100%",
+                        height: "200px",
+                        objectFit: "cover",
+                      }}
                     />
-                    <Typography variant="h5" component="h3" gutterBottom>
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                        color: "white",
+                        padding: "10px",
+                      }}
+                    >
+                      {personal.rating}
+                    </Box>
+                    <Typography
+                      variant="h5"
+                      component="h3"
+                      gutterBottom
+                      sx={{ padding: "16px" }}
+                    >
                       {personal.name}
                     </Typography>
-                    <Typography component="p">
-                      {personal.description}
-                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        padding: "8px 16px",
+                      }}
+                    >
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => setShow(!show)}
+                      >
+                        {show ? "Mostrar menos" : "Ver Mais"}
+                      </Button>
+                    </Box>
+                    {show && (
+                      <>
+                        <Divider />
+                        <Typography component="p" sx={{ padding: "16px" }}>
+                          Informações adicionais do personal aqui...
+                        </Typography>
+                      </>
+                    )}
                   </Paper>
                 </Grid>
               ))}
