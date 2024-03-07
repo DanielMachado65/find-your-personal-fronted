@@ -7,8 +7,9 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import "./App.css";
-import { Avatar, Box, Button, Container, Divider, styled } from "@mui/material";
+import { Box, Button, Container, Divider, styled } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Contrast } from "@mui/icons-material";
 
 const HeaderTitle = styled(Typography)`
   flex-grow: 1;
@@ -86,14 +87,22 @@ function normalizeString(str: string) {
     .trim();
 }
 
+function getDarkMode(darkMode: boolean) {
+  return darkMode ? "primary" : "secondary";
+}
+
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
   const [search, setSearch] = useState("");
   const [show, setShow] = useState(false);
   const debouncedSearch = useDebounce(search, 300);
 
+  console.log("darkMode", darkMode);
+
   return (
     <div className="background-image">
-      <AppBar style={{ height: "80px" }} color="primary">
+      <AppBar style={{ height: "80px" }} color={getDarkMode(darkMode)}>
         <Toolbar>
           <HeaderTitle variant="h6">
             <img
@@ -102,8 +111,12 @@ function App() {
               className="img-logo"
               style={{ height: "25px", marginRight: "10px" }}
             />
-            Find Your Personal
+            Find Your Trainer
           </HeaderTitle>
+          {/* change theme */}
+          <IconButton color="inherit" onClick={() => setDarkMode(!darkMode)}>
+            <Contrast />
+          </IconButton>
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
