@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import "./App.css";
-import { Box, Button, Container, Divider, styled } from "@mui/material";
+import { Box, Container, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Contrast } from "@mui/icons-material";
 
@@ -91,6 +91,10 @@ function getDarkMode(darkMode: boolean) {
   return darkMode ? "primary" : "secondary";
 }
 
+function getDarkModeColor(darkMode: boolean) {
+  return darkMode ? "secondary" : "primary";
+}
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -157,7 +161,7 @@ function App() {
                     sx={{
                       position: "relative",
                       overflow: "hidden",
-                      backgroundColor: darkMode ? "black" : "white",
+                      backgroundColor: darkMode ? "white" : "black",
                     }}
                   >
                     <img
@@ -183,7 +187,7 @@ function App() {
                       {personal.rating}
                     </Box>
                     <Typography
-                      color={getDarkMode(darkMode)}
+                      color={getDarkModeColor(darkMode)}
                       variant="h4"
                       component="h3"
                       gutterBottom
@@ -193,7 +197,7 @@ function App() {
                       {personal.name}
                     </Typography>
                     <Typography
-                      color={getDarkMode(darkMode)}
+                      color={getDarkModeColor(darkMode)}
                       variant="subtitle2"
                       component="h4"
                       paddingLeft={2}
@@ -206,23 +210,6 @@ function App() {
               ))}
         </Grid>
       </Container>
-      {/* Footer */}
-      <Footer>
-        <Typography variant="body1" component="p" color="primary" gutterBottom>
-          Desenvolvido com{" "}
-          <span role="img" aria-label="coração">
-            ❤️
-          </span>{" "}
-          por{" "}
-          <a
-            href="https://www.linkedin.com/in/daniel-machado-pintos/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Daniel Machado
-          </a>
-        </Typography>
-      </Footer>
     </div>
   );
 }
